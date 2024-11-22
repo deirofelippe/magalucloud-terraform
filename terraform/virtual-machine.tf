@@ -1,6 +1,6 @@
 resource "mgc_ssh_keys" "this" {
   provider = mgc.sudeste
-  name     = "mgc_ssh_key"
+  name     = "mgc_vm_ssh_key"
   key      = file("../mgc_ssh_key.pub")
 }
 
