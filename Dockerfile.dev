@@ -1,0 +1,21 @@
+FROM python:3.13.0-slim-bookworm
+
+RUN apt update \
+    # troubleshooting redes respectivamente: nc ss tcpdump curl ping
+    && apt install -y netcat-openbsd iproute2 tcpdump curl iputils-ping \
+        make git \
+    && useradd -u 1000 py 
+
+USER py
+
+WORKDIR /home/py/app
+
+ENV PYTHONUNBUFFERED=1 
+
+COPY --chown=py:py ./requirements.txt ./
+
+RUN pip install -r requirements.txt
+
+COPY --chown=py:py ./ ./
+
+CMD [ "/usr/bin/make", "py-server" ]

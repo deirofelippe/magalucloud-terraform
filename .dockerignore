@@ -1,0 +1,6 @@
+.git
+.vagrant
+__pycache__
+mgc_ssh_key*
+.pg_data
+.env
