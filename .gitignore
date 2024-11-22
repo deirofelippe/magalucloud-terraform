@@ -1,0 +1,7 @@
+*.tar.gz
+__pycache__
+*.deb.*
+*.deb
+.vagrant
+mgc_ssh_key*
+.pg_data

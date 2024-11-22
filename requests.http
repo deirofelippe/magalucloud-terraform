@@ -1,0 +1,37 @@
+@host = http://localhost:3000
+@lancamento_id = de36b7e1-61e3-42ed-80ca-5ddf5c80596b
+
+GET {{host}}/healthz HTTP/1.1
+
+###
+POST {{host}}/lancamentos HTTP/1.1
+Content-Type: application/json
+
+{
+    "classificacao": "Teste",
+    "valor": 15.00,
+    "data_pagamento": "2024-11-10 23:21:00",
+    "descricao": "Descrição teste",
+    "status": "Pago"
+}
+
+###
+PUT {{host}}/lancamentos/{{lancamento_id}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "classificacao": "Teste Atualizado",
+    "valor": 20.00,
+    "data_pagamento": "2024-11-10 23:21:00",
+    "descricao": "Descrição teste atualizado",
+    "status": "Pago"
+}
+
+###
+GET {{host}}/lancamentos HTTP/1.1
+
+###
+GET {{host}}/lancamentos/{{lancamento_id}} HTTP/1.1
+
+###
+DELETE {{host}}/lancamentos/{{lancamento_id}} HTTP/1.1
