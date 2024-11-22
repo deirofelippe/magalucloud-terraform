@@ -2,9 +2,20 @@
 
 O sistema consiste em uma aplicação em Python e Flask que cadastra lançamentos no banco de dados PostgreSQL. Os containeres serão executada em uma máquina virtual na Magalu Cloud via docker compose. A imagem que será usada já está no [Docker Hub](https://hub.docker.com/r/deirofelippe/magalucloud-terraform).
 
+## Resumo
+
+- [Terraform](#terraform)
+- [Como executar na Magalu Cloud?](#como-executar-na-magalu-cloud)
+  - [Configuração inicial do cli e do projeto](#configuração-inicial-do-cli-e-do-projeto)
+  - [Usando a CLI](#usando-a-cli)
+  - [Construindo a infra com terraform e fazendo upload](#construindo-a-infra-com-terraform-e-fazendo-upload)
+  - [Testando as rotas](#testando-as-rotas)
+
 ## Terraform
 
 ## Como executar na Magalu Cloud?
+
+### Configuração inicial do cli e do projeto
 
 Faça o cadastro na [Magalu Cloud](https://magalu.cloud/)
 
@@ -14,7 +25,7 @@ Instale o [CLI](https://docs.magalu.cloud/docs/devops-tools/cli-mgc/overview), v
 
 - `cd ./magalucloud-terraform`
 
-- Gere a chave SSH: `ssh-keygen -t rsa -b 2048 -f ./mgc_ssh_key -N ""`
+### Usando a CLI
 
 Para descobrir quais as `images` e as `machine types` disponíveis, pode ser listado via cli como diz na documentação ([aqui](https://docs.magalu.cloud/docs/computing/virtual-machine/how-to/images/list-images) e [aqui](https://docs.magalu.cloud/docs/computing/virtual-machine/how-to/machine-types/list-machines-types)), mas no momento não estão disponíveis. Uma forma que pode ser visto é criar manualmente a instância pelo site e listar os detalhes pela cli.
 
@@ -25,6 +36,10 @@ Para descobrir quais as `images` e as `machine types` disponíveis, pode ser lis
 - Exiba os detalhes da instância: `mgc virtual-machines instances get --id="f0378b58-5939-43a9-93a8-424132c2e9cf"`
 
   ![](./images/img-5.png)
+
+### Construindo a infra com terraform e fazendo upload
+
+- Gere a chave SSH: `ssh-keygen -t rsa -b 2048 -f ./mgc_ssh_key -N ""`
 
 - `terraform -chdir=./terraform init`
 
@@ -47,10 +62,12 @@ Para descobrir quais as `images` e as `machine types` disponíveis, pode ser lis
 
 - Execute o arquivo remotamente que irá instalar o docker e executar o docker compose: `ssh -i ./mgc_ssh_key ubuntu@<IP-PÚBLICO> "bash -c './scripts/config-virtual-machine.sh'"`
 
+### Testando as rotas
+
 - Faça as requisições para testar as rotas, no arquivo `./requests.http` possi o registro.
 
   ![](./images/img-2.png)
 
   ![](./images/img-3.png)
 
-- Não esqueça de destruir os recursos criados: `terraform -chdir=./terraform destroy -auto-approve`.
+- Não esqueça de destruir os recursos criados para não ser cobrado: `terraform -chdir=./terraform destroy -auto-approve`.
