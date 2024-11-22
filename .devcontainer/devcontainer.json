@@ -1,0 +1,31 @@
+{
+  "name": "Existing Docker Compose (Extend)",
+  "dockerComposeFile": ["../docker-compose.yaml", "docker-compose.yml"],
+  "service": "backend",
+  "workspaceFolder": "/home/py/app",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.languageServer": "Pylance",
+        "python.analysis.typeCheckingMode": "basic",
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        }
+      },
+      "extensions": [
+        "hashicorp.terraform",
+        "donjayamanne.python-extension-pack",
+        "donjayamanne.git-extension-pack",
+        "humao.rest-client",
+        "ms-azuretools.vscode-docker",
+        "hediet.vscode-drawio",
+        "tomoki1207.pdf",
+        "esbenp.prettier-vscode",
+        "ms-python.black-formatter"
+      ]
+    }
+  },
+  "remoteUser": "py"
+}
