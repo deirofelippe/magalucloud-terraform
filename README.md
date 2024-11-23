@@ -10,6 +10,7 @@ O sistema consiste em uma aplicação em Python e Flask que cadastra lançamento
   - [Usando a CLI](#usando-a-cli)
   - [Construindo a infra com terraform e fazendo upload](#construindo-a-infra-com-terraform-e-fazendo-upload)
   - [Testando as rotas](#testando-as-rotas)
+- [Como executar localmente?](#como-executar-localmente)
 
 ## Terraform
 
@@ -57,8 +58,8 @@ Para descobrir quais as `images` e as `machine types` disponíveis, pode ser lis
 
 - Faça upload dos arquivos que serão executados no servidor:
 
-  - `rsync -vahz -e 'ssh -i ./mgc_ssh_key -p 22' ./.env ./docker-compose.prod.yaml ubuntu@<IP-PÚBLICO>:/home/ubuntu/scripts`
   - `rsync -vahz -e 'ssh -i ./mgc_ssh_key -p 22' ./scripts ubuntu@<IP-PÚBLICO>:/home/ubuntu`
+  - `rsync -vahz -e 'ssh -i ./mgc_ssh_key -p 22' ./.env ./docker-compose.prod.yaml ubuntu@<IP-PÚBLICO>:/home/ubuntu/scripts`
 
 - Execute o arquivo remotamente que irá instalar o docker e executar o docker compose: `ssh -i ./mgc_ssh_key ubuntu@<IP-PÚBLICO> "bash -c './scripts/config-virtual-machine.sh'"`
 
@@ -71,3 +72,20 @@ Para descobrir quais as `images` e as `machine types` disponíveis, pode ser lis
   ![](./images/img-3.png)
 
 - Não esqueça de destruir os recursos criados para não ser cobrado: `terraform -chdir=./terraform destroy -auto-approve`.
+
+## Como executar localmente?
+
+- Inicia os containeres: `make up`
+- Faça as requisições para testar as rotas, no arquivo `./requests.http` possi o registro.
+- Para visualizar o banco, acesse o pgamin pela ulr http://localhost:8080
+
+  - Email: admin@admin.com
+  - Senha: admin
+
+  ![](./images/img-6.png)
+
+  ![](./images/img-7.png)
+
+  ![](./images/img-8.png)
+
+  ![](./images/img-9.png)
