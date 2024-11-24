@@ -15,7 +15,7 @@ resource "mgc_network_security_groups_rules" "allow_ingress_ssh" {
   port_range_min    = 22
   port_range_max    = 22
   protocol          = "tcp"
-  remote_ip_prefix  = "${chomp(data.http.my_ip.response_body)}/32"
+  remote_ip_prefix  = "${trimspace(data.http.my_ip.response_body)}/32"
   security_group_id = mgc_network_security_groups.this.id
 }
 
