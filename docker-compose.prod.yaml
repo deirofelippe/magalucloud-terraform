@@ -17,10 +17,11 @@ services:
         condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
-      interval: 10s
-      timeout: 5s
+      interval: 5s
       retries: 5
+      timeout: 5s
       start_period: 30s
+      start_interval: 5s
 
   database:
     image: postgres:17.1-bookworm
@@ -37,5 +38,7 @@ services:
     healthcheck:
       test: ["CMD", "pg_isready"]
       interval: 3s
-      timeout: 5s
       retries: 10
+      timeout: 5s
+      start_period: 30s
+      start_interval: 5s
